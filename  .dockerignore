@@ -1,0 +1,11 @@
+settings/local.py
+settings/production.py
+.git
+.history
+.vscode
+.DS_Store
+**/__pycache__
+slides
+snapshot
+media
+static

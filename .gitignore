@@ -1,3 +1,5 @@
+docker*
+Docker*
 *.py[cod]
 # C extensions
 *.so
