@@ -6,7 +6,7 @@ test -f settings/local.py && sed -i '' 's/DEBUG = False/DEBUG = True/g' settings
 
 # synchronous web server for development:
 # --settings=settings.local
-python3 manage.py runserver 0.0.0.0:8000 $server_params
+python3 manage.py runserver 127.0.0.1:8000 $server_params
 
 # for async web server:
 # export DJANGO_SETTINGS_MODULE=settings.local
