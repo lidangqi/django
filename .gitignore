@@ -1,3 +1,5 @@
+build.images.sh
+jenkinsfile
 docker*
 Docker*
 *.py[cod]
