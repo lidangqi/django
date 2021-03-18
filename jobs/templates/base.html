@@ -1,0 +1,92 @@
+<!--base.html-->
+{# Load the tag library #}
+{% load bootstrap4 %}
+
+{% load i18n %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% translate "Django招聘系统" %}</title>
+
+  {% bootstrap_css %}
+  {% bootstrap_javascript jquery='full' %}
+
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-md navbar-light bg-light mb-4 border">
+
+    <a class="navbar-brand" href="/">{% translate "首页" %}</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse"
+        data-target="#navbarCollapse" aria-controls="navbarCollapse"
+        aria-expanded="false" aria-label="Toggle navigattion">
+      <span class-"navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/joblist">{% translate "职位列表" %}</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        {% if user.is_authenticated %}
+          <li class="nav-item">
+            <span class="navbar-text">终于等到你 {{ user.username }}，期待加入我们，用技术去探索一个新世界</span>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/accounts/logout">{% translate "退出" %}</a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <span class="navbar-text">{% translate "欢迎你，期待加入我们，登陆后可以提交简历" %}</span>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/accounts/register">{% translate "注册" %}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/accounts/login">{% translate "登录" %}</a>
+          </li>
+        {% endif %}
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+            <input name="next" type="hidden" value="{{ redirect_to }}">
+            <select class="custom-select" name="language" onchange="this.form.submit()">
+                {% get_current_language as LANGUAGE_CODE %}
+                {% get_available_languages as LANGUAGES %}
+                {% get_language_info_list for LANGUAGES as languages %}
+                {% for language in languages %}
+                    <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                        {{ language.name_local }} ({{ language.code }})
+                    </option>
+                {% endfor %}
+            </select>
+          </form>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <main role="main" class="container">
+    <div class="pb-2 mb-2 border-bottom">
+      {% block page_header %}
+      {% endblock page_header %}
+    </div>
+    <div>
+      {% block content %}{% endblock content %}
+    </div>
+  </main>
+
+</body>
+</html>

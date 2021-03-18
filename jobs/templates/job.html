@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block page_header %}
+  <h3>岗位名称：{{job.job_name}}  城市：{{job.city_name}}</h3>
+{% endblock page_header %}
+
+{% block content %}
+
+  {% if job %}
+    <div class="card mb-3">
+      <h4 class="card-header">岗位职责：</h4>
+      <div class="card-body">
+        {{job.job_reponsibility}}
+      </div>
+      <h4 class="card-header">任职要求：</h4>
+      <div class="card-body">
+        {{job.job_requirement}}
+      </div>
+    </div>
+     
+    <input type="button" class="btn btn-primary" value="申请" 
+    onclick="location.href='/resume/add/?apply_position={{job.job_name}}&city={{job.city_name}}'"/>
+  
+  {% else %}
+    <p>职位不存在</p>
+  {% endif %}
+
+{% endblock content %}

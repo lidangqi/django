@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block page_header %}
+  <h2>提交简历</h2>
+{% endblock page_header %}
+
+{% block content %}
+  <form method="post" class="form" enctype="multipart/form-data" style="width:600px;margin-left:5px">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+      <button type="submit" class="btn btn-primary">提交</button>
+    {% endbuttons %}
+  </form>
+{% endblock content %}

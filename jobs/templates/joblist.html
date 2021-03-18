@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block page_header %}
+  <h3>职位列表</h3>
+{% endblock page_header %}
+
+{% block content %}
+  <ul>
+    {% if job_list %}
+      {% for job in job_list %}
+        <li><h3>
+          <a href="/job/{{ job.id }}/" style="color:blue">{{ job.job_name }}</a>  {{job.city_name}}  
+        </h3></li>
+      {% endfor %}
+    {% else %}
+      <li><h3>No jobs are available.</h3></li>
+    {% endif %}
+  </ul>
+
+{% endblock content %}

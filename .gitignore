@@ -1,0 +1,49 @@
+*.py[cod]
+# C extensions
+*.so
+.DS_Store
+# Packages
+.vscode
+*.egg
+*.egg-info
+.ropeproject
+dist
+build
+eggs
+parts
+bin
+var
+sdist
+dump.rdb
+develop-eggs
+.installed.cfg
+lib
+lib64
+media
+static
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.coverage
+.tox
+nosetests.xml
+
+# Translations
+*.mo
+
+# local .history files in VS Code
+.history
+
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
+.idea
+celerybeat-schedule.db
+celerybeat.pid
+dump.rdb
+db.sqlite3
+settings/local.py
+settings/production.py
