@@ -11,3 +11,4 @@ python3 manage.py runserver 127.0.0.1:8000 $server_params
 # for async web server:
 # export DJANGO_SETTINGS_MODULE=settings.local
 # uvicorn recruitment.asgi:application --workers 3
+# gunicorn -w 3 -b 127.0.0.1:8000 recruitment.wsgi:application
