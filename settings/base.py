@@ -190,17 +190,17 @@ DATABASES = {
         'ENGINE': 'django_prometheus.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     },
-    'running': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'running',
-        'USER': 'root',
-        'PASSWORD': 'password',
-        'HOST': 'localhost',
-        'PORT': '3306',
-    },
+    # 'running': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'running',
+    #     'USER': 'root',
+    #     'PASSWORD': 'password',
+    #     'HOST': 'localhost',
+    #     'PORT': '3306',
+    # },
 }
 
-DATABASE_ROUTERS = ['settings.router.DatabaseRouter']
+# DATABASE_ROUTERS = ['settings.router.DatabaseRouter']
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
