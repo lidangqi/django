@@ -2,7 +2,7 @@
 
 from celery import Celery
 
-app = Celery('tasks', backend='redis://127.0.0.1', broker='redis://127.0.0.1')
+app = Celery('tasks', backend='redis://redis', broker='redis://redis')
 
 
 @app.task

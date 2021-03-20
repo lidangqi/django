@@ -41,15 +41,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_python3_ldap',
+    #'django_python3_ldap',
     'jobs',  # 应用不能重复注册，下面一行是手工注册 JobConfig
     #'jobs.apps.JobConfig',
     'recruitment',
     'interview',
-    'running',
+    #'running',
     'rest_framework',
     'django_celery_beat',
     'django_oss_storage',
+    'django_prometheus',
     'captcha',
 ]
 
@@ -79,17 +80,19 @@ CACHES_local = {
 }
 
 CACHE_MIDDLEWARE_SECONDS = 60  # default cache time for the whole website
-
+# redis cache is disabled, change "CACHES_redis" to "CACHES" to enable it
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/1",
-        "TIMEOUT": 300,
+        "LOCATION": "redis://redis:6379/1",
+        'TIMEOUT': 300,  # default expire time per api call
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
-            "SOCKET_CONNECT_TIMEOUT": 5,
-            "SOCKET_TIMEOUT": 5,
-        },
+            "SOCKET_CONNECT_TIMEOUT": 5,  # in seconds
+            "SOCKET_TIMEOUT": 5,  # r/w timeout in seconds
+            'MAX_ENTRIES': 10000,
+            'KEY_PREFIX': 'recruit-',
+        }
     }
 }
 
