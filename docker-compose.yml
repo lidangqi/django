@@ -1,0 +1,42 @@
+version: "3.2"
+services:
+  web:
+    image: "lidangqi/django-recruitment-base:0.8"
+    container_name: recruitment-web
+    entrypoint: ["/bin/sh", "/data/recruitment/start.production.sh"]
+    environment:
+      - server_params=--settings=settings.production
+    volumes:
+      - .:/data/recruitment
+      - /data/logs/recruitment/
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+      - celery
+      - flower
+  redis:
+    image: "redis:alpine"
+    container_name: recruit-redis
+    ports:
+      - "6379:6379"
+  celery:
+    image: "lidangqi/django-recruitment:0.9"
+    container_name: recruit-celery
+    volumes:
+      - .:/data/recruitment
+      - /data/logs/recruitment/
+    entrypoint: ["/bin/sh", "/data/recruitment/worker.start.sh"]
+    depends_on: 
+      - redis
+  flower:
+    image: "lidangqi/django-recruitment:0.9"
+    container_name: recruit-flower
+    ports:
+      - "5555:5555"
+    volumes:
+      - .:/data/recruitment
+      - /data/logs/recruitment/
+    entrypoint: ["/bin/sh", "/data/recruitment/flower.start.sh"]
+    depends_on: 
+      - redis
